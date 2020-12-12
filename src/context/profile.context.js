@@ -7,11 +7,14 @@ const ProfileContext= createContext()
 export const ProfileProvider=({children})=>{
 
     const [profile,setProfile]=useState(null)
+    const [isLoading,setIsLoading]=useState(true)
 
     useEffect(()=>{
-     auth.onAuthStateChanged(authObj=>{
+        let userRef
+     const authUnsub=auth.onAuthStateChanged(authObj=>{
         if (authObj){
-            database.ref(`/profiles/${authObj.uid}`).on('value',(snap)=>{
+            userRef=database.ref(`/profiles/${authObj.uid}`)
+            userRef.on('value',(snap)=>{
                 const {name,createdAt}=snap.val()
                 const data = {
                     name,
@@ -20,18 +23,28 @@ export const ProfileProvider=({children})=>{
                     email:authObj.email
                 }
                 setProfile(data)
+                setIsLoading(false)
             })
             
             
         }
         else{
-            setProfile(null)  
+            if (userRef){
+                userRef.off()
+            }
+            setProfile(null)
+            setIsLoading(false)  
           }
      })
+     return () => {authUnsub()
+    if (userRef){
+        userRef.off()
+    }
+    }
     },[]
     )
 
-    return <ProfileContext.Provider value={profile}>
+    return <ProfileContext.Provider value={{isLoading,profile}}>
         {children}
         </ProfileContext.Provider>
 
