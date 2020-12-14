@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { Alert, Button, Modal } from 'rsuite'
+import AvatarEditor from 'react-avatar-editor'
 import { useModalState } from '../../misc/custom-hooks'
 
 const fileInputTypes = ".png, .jpeg, .jpg"
@@ -46,7 +47,20 @@ const AvatarUploadBtn = () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        xxx
+                        <div className="d-flex justify-content-center align-items-center h-100">
+
+                        
+                        {img &&(
+                        <AvatarEditor
+                        image={img}
+                        width={200}
+                        height={200}
+                        border={10}
+                        borderRadius={100}
+                        rotate={0}
+                      />
+                        )}
+                        </div>
                     </Modal.Body>
                     <Modal.Footer>
                     <Button block appearance="ghost">
