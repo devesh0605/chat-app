@@ -5,11 +5,12 @@ import Messages from '../../components/chat-window/messages'
 import ChatTop from '../../components/chat-window/top'
 import ChatBottom from '../../components/chat-window/bottom'
 import { CurrentRoomProvider } from '../../context/current-room-context'
+import { useRooms } from '../../context/rooms.context'
 
 
 const Chat = () => {
     const {chatId} = useParams()
-    const rooms = useParams()
+    const rooms = useRooms()
 
     if (!rooms){
         return <Loader 
@@ -19,8 +20,7 @@ const Chat = () => {
         content="loading" 
         speed="slow"/>
     }
-    const currentRoom = rooms.find
-    (room => room.id === chatId)
+    const currentRoom = rooms.find(room => room.id === chatId)
 
     if (!currentRoom){
         return <h6 className="text-center mt-Page">Chat {chatId} not found</h6>
