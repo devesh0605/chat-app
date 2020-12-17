@@ -6,7 +6,9 @@ const EditableInput = ({
     onSave,
     label=null,
     placeholder="Write your value",
-    emptyMsg="Input is empty",...inputProps
+    emptyMsg="Input is empty",
+    wrapperClassName="",
+    ...inputProps
 }) =>{
 const [input,setInput]=useState(initialValue)
 const [isEditable,setIsEditable]=useState(false)
@@ -29,7 +31,7 @@ const onSaveClick=async ()=>{
     setIsEditable(false)
 }
 return (
-        <div>
+        <div className={wrapperClassName}>
             {label}
             <InputGroup>
             <Input 
