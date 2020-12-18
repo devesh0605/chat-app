@@ -3,8 +3,8 @@
 import React from 'react'
 import { Badge, Icon, IconButton, Tooltip, Whisper } from 'rsuite'
 
-const ConditionalBadge = ({condition,Children})=>{
-    return condition ? <Badge content={condition}>{Children}</Badge> : Children
+const ConditionalBadge = ({condition,children})=>{
+    return condition ? <Badge content={condition}>{children}</Badge> : children
 
 }
 
