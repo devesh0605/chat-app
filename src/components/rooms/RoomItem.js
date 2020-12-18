@@ -27,7 +27,7 @@ return (
                     </div>
                     <div className="text-disappear ml-2">
                         <div className="italic">{lastMessage.author.name}</div>
-                        <div>{lastMessage.text}</div>
+                        <div>{lastMessage.text || lastMessage.file.name}</div>
                     </div>
                     </>:
                     <span>No messages yet...</span>
