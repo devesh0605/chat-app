@@ -31,7 +31,7 @@ const AttachmentBtnModal = ({afterUpload}) => {
                 return{
                     contentType:snap.metadata.contentType,
                     name:snap.metadata.name,
-                    url:await (await snap).ref.getDownloadURL()
+                    url:await snap.ref.getDownloadURL()
                 }
             })
             const files = await Promise.all(shapePromises)
